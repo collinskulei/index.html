@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        :root {
+            --primary-pink: #ff4d6d;
+            --soft-pink: #ffb3c1;
+            --dark-pink: #590d22;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        /* Hero Section with Background & Pink Overlay */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=2070') no-repeat center center/cover;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 77, 109, 0.4); /* Pink Tint */
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
+        .poem { font-style: italic; font-size: 1.2rem; max-width: 600px; line-height: 1.6; margin-bottom: 30px; }
+
+        /* Booking Section */
+        .booking-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        select, input, button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        button {
+            background: var(--primary-pink);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover { transform: scale(1.05); background: #ff758f; }
+
+        /* Falling Emojis Animation */
+        .emoji {
+            position: fixed;
+            top: -50px;
+            z-index: 10;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="overlay"></div>
+        
+        <div class="content">
+            <h1>Hey Gorgeous,</h1>
+            <div class="poem">
+                "In the city of green, under the Nairobi sun,<br>
+                Of all the people I've met, you’re the only one.<br>
+                From Java coffee dates to sunset views so grand,<br>
+                I’d love nothing more than to hold your hand."
+            </div>
+
+            <div class="booking-card">
+                <h3>Will you be my Valentine?</h3>
+                <p>Pick our celebratory spot:</p>
+                
+                <select id="venue">
+                    <option value="Cultiva Farm">Cultiva Farm, Karen</option>
+                    <option value="Pepper Tree">Pepper Tree, Westlands</option>
+                    <option value="Inti">Inti (Nikkei Experience)</option>
+                    <option value="The View">The View (Mövenpick)</option>
+                </select>
+
+                <input type="date" id="date" value="2026-02-14">
+                <input type="time" id="time" value="19:00">
+
+                <button onclick="sendRSVP()">YES, I'D LOVE TO! ❤️</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Create falling hearts
+        function createEmoji() {
+            const emojis = ['❤️', '💖', '✨', '🌹', '💕'];
+            const e = document.createElement('div');
+            e.className = 'emoji';
+            e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            e.style.left = Math.random() * 100 + 'vw';
+            e.style.animationDuration = Math.random() * 3 + 2 + 's';
+            e.style.fontSize = Math.random() * 20 + 10 + 'px';
+            document.body.appendChild(e);
+
+            setTimeout(() => { e.remove(); }, 5000);
+        }
+        setInterval(createEmoji, 300);
+
+        // WhatsApp Integration
+        function sendRSVP() {
+            const venue = document.getElementById('venue').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const phoneNumber = "254700574125"; // Reformatted for WhatsApp
+            
+            const message = `Yes! I'd love to be your Valentine! ❤️ %0A%0A📍 Venue: ${venue} %0A📅 Date: ${date} %0A⏰ Time: ${time}`;
+            
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
