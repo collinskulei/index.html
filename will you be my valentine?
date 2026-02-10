@@ -3,156 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine?</title>
+    <title>A Special Invitation for Mercy</title>
     <style>
         :root {
             --primary-pink: #ff4d6d;
-            --soft-pink: #ffb3c1;
-            --dark-pink: #590d22;
+            --deep-red: #c9184a;
+            --soft-white: #fff0f3;
+            --glass: rgba(255, 255, 255, 0.15);
+            --glow-pink: rgba(255, 77, 109, 0.9);
         }
 
-        body, html {
+        body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
             color: white;
-        }
-
-        /* Hero Section with Background & Pink Overlay */
-        .hero {
-            position: relative;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            background: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=2070') no-repeat center center/cover;
+            overflow-x: hidden;
         }
 
-        .overlay {
-            position: absolute;
+        /* Vibrant Floating Hearts Animation */
+        .heart-bg {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 77, 109, 0.4); /* Pink Tint */
-            z-index: 1;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .content {
+        .heart {
+            position: absolute;
+            fill: var(--primary-pink);
+            filter: drop-shadow(0 0 10px var(--glow-pink));
+            animation: float 12s infinite linear, twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        .container {
             position: relative;
-            z-index: 2;
-            padding: 20px;
+            z-index: 1;
+            width: 90%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.05);
+            margin: 20px 0;
         }
 
-        h1 { font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
-        .poem { font-style: italic; font-size: 1.2rem; max-width: 600px; line-height: 1.6; margin-bottom: 30px; }
-
-        /* Booking Section */
-        .booking-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            display: inline-block;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        /* Photo Styles */
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            border: 4px solid var(--primary-pink);
+            box-shadow: 0 0 30px var(--glow-pink);
+            overflow: hidden;
+            background-color: #2a2a4a;
+            position: relative;
+            animation: photoPulse 4s infinite ease-in-out;
         }
 
-        select, input, button {
-            display: block;
+        @keyframes photoPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px var(--glow-pink); }
+            50% { transform: scale(1.05); box-shadow: 0 0 45px var(--glow-pink); }
+        }
+
+        .profile-photo img {
             width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 10px;
-            border: none;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h2 {
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            color: var(--primary-pink);
+            font-weight: 600;
+            text-shadow: 0 0 10px var(--glow-pink);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 0;
+            margin-bottom: 24px;
+            background: linear-gradient(to right, #fff, #ffb7c5, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .poem {
+            font-style: italic;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary-pink);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .booking-card {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-pink);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 5px;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        p {
+            margin-top: 0;
+            font-size: 1.1rem;
+            opacity: 1;
+            text-shadow: 0 0 5px rgba(255,255,255,0.3);
+            text-align: center;
+        }
+
+        select, input {
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
             font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        select option {
+            background: #1a1a2e;
+            color: white;
         }
 
         button {
-            background: var(--primary-pink);
+            margin-top: 10px;
+            padding: 18px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(45deg, var(--deep-red), var(--primary-pink));
             color: white;
             font-weight: bold;
+            font-size: 1.2rem;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px var(--glow-pink);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
         }
 
-        button:hover { transform: scale(1.05); background: #ff758f; }
-
-        /* Falling Emojis Animation */
-        .emoji {
-            position: fixed;
-            top: -50px;
-            z-index: 10;
-            user-select: none;
-            pointer-events: none;
-            animation: fall linear forwards;
+        button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px var(--glow-pink);
+            filter: brightness(1.1);
         }
 
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); }
+        .footer-note {
+            margin-top: 25px;
+            font-size: 0.8rem;
+            opacity: 0.8;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 25px; }
+            .profile-photo { width: 150px; height: 150px; }
         }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <div class="overlay"></div>
-        
+    <div class="heart-bg" id="heart-bg"></div>
+
+    <div class="container">
         <div class="content">
-            <h1>Hey Gorgeous,</h1>
+            <div class="profile-photo">
+                <!-- Image source updated to mercy.jpeg -->
+                <img src="mercy.jpeg" alt="Mercy Cherono Rotich" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=500'">
+            </div>
+
+            <h2>To My Dearest</h2>
+            <h1>Mercy Cherono Rotich</h1>
+            
             <div class="poem">
-                "In the city of green, under the Nairobi sun,<br>
-                Of all the people I've met, you’re the only one.<br>
-                From Java coffee dates to sunset views so grand,<br>
-                I’d love nothing more than to hold your hand."
+                "From the moment we met, my world found its light,<br>
+                With you, Mercy, everything feels so right.<br>
+                Through every laugh and every Nairobi street,<br>
+                You make my life’s journey feel truly complete.<br><br>
+                Will you walk this path and share this day with me?"
             </div>
 
             <div class="booking-card">
-                <h3>Will you be my Valentine?</h3>
-                <p>Pick our celebratory spot:</p>
+                <h3>Collins Kulei is asking...</h3>
+                <p>Will you be my Valentine?</p>
                 
-                <select id="venue">
-                    <option value="Cultiva Farm">Cultiva Farm, Karen</option>
-                    <option value="Pepper Tree">Pepper Tree, Westlands</option>
-                    <option value="Inti">Inti (Nikkei Experience)</option>
-                    <option value="The View">The View (Mövenpick)</option>
-                </select>
+                <div class="input-group">
+                    <label for="venue">Choose a Location</label>
+                    <select id="venue">
+                        <option value="Cultiva Farm">Cultiva Farm, Karen</option>
+                        <option value="Pepper Tree">Pepper Tree, Westlands</option>
+                        <option value="Inti">Inti (Nikkei Experience)</option>
+                        <option value="The View">The View (Mövenpick)</option>
+                        <option value="A Surprise Location">Surprise Me, Collins!</option>
+                    </select>
+                </div>
 
-                <input type="date" id="date" value="2026-02-14">
-                <input type="time" id="time" value="19:00">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <label for="date">Pick a Date</label>
+                        <input type="date" id="date" value="2026-02-14">
+                    </div>
+                    <div class="input-group">
+                        <label for="time">Choose Time</label>
+                        <input type="time" id="time" value="19:00">
+                    </div>
+                </div>
 
                 <button onclick="sendRSVP()">YES, I'D LOVE TO! ❤️</button>
             </div>
+
+            <div class="footer-note">
+                Made with ❤️ by Collins
+            </div>
         </div>
-    </section>
+    </div>
 
     <script>
-        // Create falling hearts
-        function createEmoji() {
-            const emojis = ['❤️', '💖', '✨', '🌹', '💕'];
-            const e = document.createElement('div');
-            e.className = 'emoji';
-            e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            e.style.left = Math.random() * 100 + 'vw';
-            e.style.animationDuration = Math.random() * 3 + 2 + 's';
-            e.style.fontSize = Math.random() * 20 + 10 + 'px';
-            document.body.appendChild(e);
+        const heartContainer = document.getElementById('heart-bg');
+        const heartCount = 25;
 
-            setTimeout(() => { e.remove(); }, 5000);
+        for (let i = 0; i < heartCount; i++) {
+            createHeart();
         }
-        setInterval(createEmoji, 300);
 
-        // WhatsApp Integration
+        function createHeart() {
+            const heart = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            heart.setAttribute("viewBox", "0 0 32 32");
+            heart.classList.add("heart");
+            
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", "M16 28.5L14.1 26.7C7.33 20.58 3 16.5 3 11.5 3 7.42 6.42 4 10.5 4c2.31 0 4.52 1.07 6 2.76C17.98 5.07 20.19 4 22.5 4 26.58 4 30 7.42 30 11.5c0 5-4.33 9.08-11.1 15.2L16 28.5z");
+            
+            heart.appendChild(path);
+            
+            const size = Math.random() * 25 + 15;
+            heart.style.width = `${size}px`;
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.animationDuration = `${Math.random() * 8 + 7}s, ${Math.random() * 2 + 2}s`;
+            heart.style.animationDelay = `-${Math.random() * 15}s, -${Math.random() * 2}s`;
+            
+            heartContainer.appendChild(heart);
+        }
+
         function sendRSVP() {
             const venue = document.getElementById('venue').value;
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
-            const phoneNumber = "254700574125"; // Reformatted for WhatsApp
+            const phoneNumber = "254700574125";
             
-            const message = `Yes! I'd love to be your Valentine! ❤️ %0A%0A📍 Venue: ${venue} %0A📅 Date: ${date} %0A⏰ Time: ${time}`;
+            const message = `Hi Collins! This is Mercy. I'd love to be your Valentine! ❤️ %0A%0A📍 Venue: ${venue} %0A📅 Date: ${date} %0A⏰ Time: ${time}`;
             
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         }
